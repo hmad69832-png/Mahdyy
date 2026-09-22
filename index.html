@@ -3,51 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>منصة مهدي - Mahdy AI</title>
+<title>منصة مهدي - تالتة اعدادي</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Tahoma}
-body{background:#020611;color:#fff}
-.header{background:#000;padding:16px;text-align:center;border-bottom:2px solid #ffd700}
-.logo{font-size:28px;font-weight:900;color:#ffd700}
-.card{background:#0f1833;border:1px solid #1e2d5a;border-radius:16px;padding:12px;margin:12px auto;max-width:480px}
-.video{width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;margin:8px 0}
-.video iframe{width:100%;height:100%;border:0}
+body{background:#040b1e;color:#fff;line-height:1.8}
+.header{background:#000;padding:18px;text-align:center;border-bottom:2px solid #ffd700;position:sticky;top:0;z-index:99}
+.logo{font-size:32px;font-weight:900;color:#ffd700}
+.card{background:linear-gradient(145deg,#101b3b,#0d142e);border:1px solid #1e2d5a;border-radius:20px;padding:16px;margin:14px auto;max-width:520px}
+.title{font-size:14px;font-weight:900;color:#ffd700;margin-bottom:8px}
+.note{background:#060d24;border-right:3px solid #ffd700;padding:10px;border-radius:10px;font-size:12px;color:#cdd6f0;margin:8px 0;white-space:pre-line}
+.q{background:#1a274f;padding:10px;border-radius:12px;margin:8px 0;font-size:12px}
+.ans{color:#22c55e;font-weight:bold;margin-top:4px;white-space:pre-line}
+.bubble{padding:10px 14px;border-radius:16px;font-size:12px;margin:6px 0;max-width:92%;line-height:1.6}
+.me{background:#ffd700;color:#000;margin-right:auto}
+.ai{background:#1a274f;color:#fff}
 </style>
 </head>
 <body>
 <div class="header">
-<div class="logo">꧁༺ مهدي ༻꧂ Mahdy</div>
-<div style="font-size:11px;color:#aaa>مدرسن ة</div>
+<div class="logo">꧁༺ مهدي ༻꧂</div>
+<div style="font-size:11px;color:#8ea0c0">منصة تالتة إعدادي - مذكرات + بنك أسئلة + مهدي AI</div>
 </div>
 
-<div style="max-width:500px;margin:auto;padding:10px">
+<div style="max-width:540px;margin:auto;padding:10px">
 
 <div class="card">
-<h3>🎥 اسم الفاعل - عاطف رمضان 2027</h3>
-<div class="video"><iframe src="https://www.youtube.com/embed/saZp3J1vH8A" allowfullscreen></iframe></div>
-<h3>🎥 اسم الفاعل - اسلام عماد تدريبات</h3>
-<div class="video"><iframe src="https://www.youtube.com/embed/9mI2R2v1sLk" allowfullscreen></iframe></div>
-<h3>🎥 اسم الفاعل - بسطتهالك</h3>
-<div class="video"><iframe src="https://www.youtube.com/embed/kffacxfA7G4" allowfullscreen></iframe></div>
-</div>
-
-<div class="card">
-<h3>📚 أغلى من الذهب - قراءة</h3>
-<div class="video"><iframe src="https://www.youtube.com/embed/_uQrJ0TkZlc" allowfullscreen></iframe></div>
+<div class="title">📚 مذكرة عربي - اسم الفاعل</div>
+<div class="note">التعريف: اسم بيدل على اللي عمل الفعل
+الوزن: 
+- ثلاثي: فاعل (كتب=كاتب، قال=قائل، قضى=قاضٍ)
+- غير ثلاثي: ميم مضمومة + كسر قبل الآخر (أكرم=مُكرِم، انطلق=مُنطلِق، استخرج=مُستخرِج)
+ملاحظات مهدي: 
+- لو الفعل أجوف (قال) بنقلب الألف همزة = قائل
+- لو ناقص (قضى) بنحذف الياء في الرفع والجر = هذا قاضٍ</div>
+<div class="q"><b>س: هات اسم الفاعل من (فهم - علّم - استفهم)</b><div class="ans">ج: فاهم - مُعلِّم - مُستفهِم</div></div>
 </div>
 
 <div class="card">
-<h3>💻 حاسب - Python y=w*x+b</h3>
-<div class="video"><iframe src="https://www.youtube.com/embed/Lv2aC_uGA2w" allowfullscreen></iframe></div>
+<div class="title">💻 مذكرة حاسب - الذكاء الاصطناعي</div>
+<div class="note">1- y = w*x + b : قانون التنبؤ
+   x = المدخل، w = الوزن بيتعلم، b = التحيز
+   مثال: x=10 درجات، w=0.5، b=2 => y=7 توقع
+
+2- Python:
+   list = [1,2,3] بتحفظ بيانات
+   for x in list: بتلف عليهم
+   def predict(x): بتعمل دالة
+   AI بيجرب w و b كتير لحد ما الخطأ يبقى صغير</div>
+<div class="q"><b>س: ليه بنستخدم Lists في AI؟</b><div class="ans">ج: عشان نحفظ آلاف البيانات (درجات، أسعار) وندرب الموديل عليها مرة واحدة</div></div>
 </div>
 
-<div class="card" style="text-align:center">
-<h3>🤖 شات Mahdy AI</h3>
-<p style="font-size:11px;color:#aaa">اسألني عن اي درس وهجاوبك</p>
-<input id="q" placeholder="اكتب سؤالك..." style="width:100%;padding:10px;border-radius:20px;border:1px solid #333;background:#000;color:#fff;margin-top:8px">
-<button onclick="alert('أنا Mahdy AI: اسم الفاعل على وزن فاعل، مثال كتب=كاتب. من غير الثلاثي ميم مضمومة وكسر قبل الآخر مثل أكرم=مُكرم')" style="width:100%;margin-top:8px;padding:10px;border-radius:20px;background:#ffd700;border:none;font-weight:bold">اسأل Mahdy</button>
-</div>
+<div class="card">
+<div class="title">🌍 مذكرة دراسات - تالتة اعدادي</div>
+<div class="note">أولا: قارات العالم
+- القديم: أفريقيا، آسيا، أوروبا
+- الجديد: الأمريكتين، أستراليا، القطبية
 
-</div>
-</body>
-</html>
+ثانيا: محمد علي 1805-1848 مؤسس مصر الحديثة
+- بنا جيش قوي، مدارس، مصانع، قناطر
