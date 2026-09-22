@@ -2,27 +2,97 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>منصة مهدي التعليمية</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-<style>body{font-family:'Cairo',sans-serif}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>منصة مستر مهدي - Mahdy AI</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',Tahoma}
+body{background:#020611;color:#fff;min-height:100vh}
+.header{background:linear-gradient(135deg,#000 0%,#0f1a3a 100%);padding:18px 12px;text-align:center;border-bottom:2px solid #ffd700;position:sticky;top:0;z-index:99}
+.logo{font-size:28px;font-weight:900;background:linear-gradient(90deg,#ffd700,#ff3b3b,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logo2{font-size:13px;color:#8ea0c0;margin-top:4px;letter-spacing:2px}
+.tabs{display:flex;gap:6px;padding:10px;overflow-x:auto;max-width:500px;margin:0 auto;scrollbar-width:none}
+.tabs button{flex:1;min-width:70px;padding:10px 8px;border-radius:20px;border:1px solid #1e2d5a;background:#111a33;color:#8ea0c0;font-size:11px;font-weight:bold;cursor:pointer}
+.tabs button.active{background:linear-gradient(90deg,#ffd700,#ffb700);color:#000;border-color:#ffd700}
+.container{max-width:480px;margin:0 auto;padding:10px}
+.card{background:#0f1833;border:1px solid #1e2d5a;border-radius:18px;padding:14px;margin-bottom:12px}
+.card h3{font-size:14px;margin-bottom:8px}
+.video{width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:8px;position:relative}
+.video iframe{width:100%;height:100%;border:0}
+.badge{display:inline-block;padding:3px 8px;border-radius:8px;font-size:10px;font-weight:bold;margin-left:4px}
+.btn{width:100%;padding:12px;border-radius:24px;border:none;font-weight:900;font-size:13px;cursor:pointer;margin-top:8px}
+.btn-gold{background:linear-gradient(90deg,#ffd700,#ffaa00);color:#000}
+.btn-dark{background:#1a2547;color:#fff;border:1px solid #2a3a6a}
+.q{padding:10px;background:#0a122b;border-radius:12px;margin:8px 0;border-right:3px solid #ffd700}
+.q b{font-size:12px}
+.q button{margin:6px 4px 0 0;padding:6px 10px;border-radius:16px;border:1px solid #2a3a6a;background:#162040;color:#fff;font-size:11px;cursor:pointer}
+.q button.correct{background:#22c55e;color:#000;border-color:#22c55e}
+.q button.wrong{background:#ef4444;color:#fff}
+/* Chat */
+.chat-wrap{position:fixed;bottom:14px;left:10px;right:10px;max-width:460px;margin:0 auto;background:#0a122b;border:1px solid #ffd700;border-radius:20px;overflow:hidden;box-shadow:0 10px 40px #000;z-index:999;display:none}
+.chat-head{background:linear-gradient(90deg,#ffd700,#ff8c00);color:#000;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:900;font-size:13px}
+.chat-body{height:260px;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px}
+.msg{max-width:85%;padding:8px 12px;border-radius:14px;font-size:12px;line-height:1.5}
+.msg.user{background:#ffd700;color:#000;align-self:flex-start;border-bottom-left-radius:4px}
+.msg.bot{background:#1a2547;color:#fff;align-self:flex-end;border-bottom-right-radius:4px;border:1px solid #2a3a6a}
+.chat-input{display:flex;gap:6px;padding:8px;background:#050a1a}
+.chat-input input{flex:1;padding:10px 12px;border-radius:20px;border:1px solid #2a3a6a;background:#0f1833;color:#fff;font-size:12px;outline:none}
+.chat-btn{position:fixed;bottom:18px;right:14px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#ffd700,#ff3b3b);border:none;font-size:24px;box-shadow:0 4px 20px #ffd70066;cursor:pointer;z-index:1000}
+</style>
 </head>
-<body class="bg-[#0f0f0f] text-white">
-<header class="p-5 flex justify-between items-center max-w-6xl mx-auto">
-<h1 class="text-2xl font-black text-yellow-400">مهدي</h1>
-<button class="bg-white text-black px-5 py-2 rounded-full font-bold">دخول</button>
-</header>
-<section class="max-w-6xl mx-auto p-6 text-center mt-10">
-<h2 class="text-4xl md:text-6xl font-black leading-tight">منصتك للدراسة<br><span class="text-yellow-400">بذكاء مش بمجهود</span></h2>
-<p class="mt-6 text-gray-400 text-lg">فيديوهات، مذكرات، واختبارات كلها في مكان واحد</p>
-<button class="mt-8 bg-yellow-400 text-black px-10 py-4 rounded-full font-black text-xl">ابدأ الآن مجانا</button>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-16 text-right">
-<div class="bg-zinc-900 p-6 rounded-3xl border border-zinc-800"><h3 class="font-bold text-xl">📚 شرح مبسط</h3><p class="text-gray-400 mt-2">كل درس متقسم فيديوهات قصيرة</p></div>
-<div class="bg-zinc-900 p-6 rounded-3xl border border-zinc-800"><h3 class="font-bold text-xl">📝 اختبارات</h3><p class="text-gray-400 mt-2">اختبر نفسك بعد كل وحدة</p></div>
-<div class="bg-zinc-900 p-6 rounded-3xl border border-zinc-800"><h3 class="font-bold text-xl">📄 مذكرات PDF</h3><p class="text-gray-400 mt-2">حمل المذكرات بضغطة زر</p></div>
+<body>
+<div class="header">
+<div class="logo">꧁༺ مـۧـهـﮧدي ༻꧂ Mahdy</div>
+<div class="logo2">★ MAHDY AI PLATFORM - 3ع الجديد 2027 ★</div>
 </div>
-</section>
-<p class="text-center text-zinc-600 mt-20 pb-10">تم بواسطة مهدي - 2026</p>
-</body>
-</html>
+
+<div class="tabs">
+<button class="active" onclick="showTab('videos',this)">🎥 فيديوهات</button>
+<button onclick="showTab('notes',this)">📚 مذكرات</button>
+<button onclick="showTab('quiz',this)">✅ أسئلة</button>
+<button onclick="showTab('chatsec',this)">🤖 شات Mahdy</button>
+</div>
+
+<div class="container">
+<!-- فيديوهات -->
+<div id="videos">
+<div class="card"><span class="badge" style="background:#ffd700;color:#000">عربي</span><span class="badge" style="background:#222">الوحدة 1</span>
+<h3>أغلى من الذهب + اسم الفاعل - ص20</h3>
+<div class="video"><iframe src="https://www.youtube.com/embed/5MgBikgcWnY" allowfullscreen></iframe></div>
+<button class="btn btn-gold">▶️ شغال دلوقتي - تقدر تغير اللينك</button>
+</div>
+
+<div class="card"><span class="badge" style="background:#38bdf8;color:#000">حاسب</span><span class="badge" style="background:#222">AI</span>
+<h3>💻 Python - التنبؤ y=w*x+b + Strings & Lists</h3>
+<div class="video"><iframe src="https://www.youtube.com/embed/_uQrJ0TkZlc" allowfullscreen></iframe></div>
+</div>
+
+<div class="card"><span class="badge" style="background:#22c55e;color:#000">دراسات</span>
+<h3>🌍 قارات العالم الجديد + خريطة</h3>
+<div class="video"><iframe src="https://www.youtube.com/embed/kffacxfA7G4" allowfullscreen></iframe></div>
+</div>
+</div>
+
+<!-- مذكرات -->
+<div id="notes" style="display:none">
+<div class="card"><h3>📚 مذكرات العربي الجديد PDF</h3>
+<p style="font-size:11px;color:#8ea0c0;margin:6px 0">ملخص اسم الفاعل والمفعول وصيغ المبالغة بالأمثلة</p>
+<button class="btn btn-dark" onclick="alert('ارفع ملفك على Google Drive وخد لينك وحطه هنا')">📥 تحميل مذكرة العربي - 2 ميجا</button>
+<button class="btn btn-dark">📥 تحميل مذكرة الحاسب Python</button>
+<button class="btn btn-dark">📥 تحميل مذكرة الدراسات خرائط</button>
+</div>
+<div class="card"><h3>طريقة رفع مذكرتك</h3><p style="font-size:11px;color:#a3b3d1;line-height:1.8">1- ارفع PDF على Google Drive<br>2- اعمل مشاركة Anyone with link<br>3- انسخ الرابط وحطه بدل alert اللي في الزرار</p></div>
+</div>
+
+<!-- اسئلة -->
+<div id="quiz" style="display:none">
+<div class="card"><h3>✅ بنك أسئلة - اسم الفاعل (الوحدة 1)</h3>
+<div class="q"><b>1- اسم الفاعل من كتب هو؟</b><br><button onclick="ans(this,1)">كاتب</button><button onclick="ans(this,0)">مكتوب</button><button onclick="ans(this,0)">كتاب</button></div>
+<div class="q"><b>2- صيغة المبالغة من (علم) على وزن فعّال؟</b><br><button onclick="ans(this,0)">عالم</button><button onclick="ans(this,1)">علّام</button><button onclick="ans(this,0)">معلوم</button></div>
+<div class="q"><b>3- في الحاسب y=w*x+b يسمى؟</b><br><button onclick="ans(this,1)">نموذج تنبؤ خطي</button><button onclick="ans(this,0)">دالة طباعة</button></div>
+<div id="score" style="text-align:center;color:#ffd700;font-weight:bold;margin-top:8px">النتيجة: 0 / 3</div>
+</div>
+</div>
+
+<!-- شات -->
+<div id="chatsec" style="display:none">
+<div class="card" style="text-align:center"><h3>🤖 شات Mahdy AI</h3><p style="font-size:11px;color:#8ea0c0">اسألني عن أي درس من اللي عندك وأنا هجاوبك فوراً</p><button class="btn btn-gold" onclick="openChat()">💬 افتح الشات الآن
