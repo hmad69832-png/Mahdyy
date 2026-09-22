@@ -11,53 +11,185 @@ body{background:#040b1e;color:#fff;line-height:1.8}
 .logo{font-size:32px;font-weight:900;color:#ffd700}
 .card{background:linear-gradient(145deg,#101b3b,#0d142e);border:1px solid #1e2d5a;border-radius:20px;padding:16px;margin:14px auto;max-width:520px}
 .title{font-size:14px;font-weight:900;color:#ffd700;margin-bottom:8px}
-.note{background:#060d24;border-right:3px solid #ffd700;padding:10px;border-radius:10px;font-size:12px;color:#cdd6f0;margin:8px 0;white-space:pre-line}
+.note{background:#060d24;border-right:3px solid #ffd700;padding:12px;border-radius:10px;font-size:12px;color:#cdd6f0;margin:8px 0;white-space:pre-line}
 .q{background:#1a274f;padding:10px;border-radius:12px;margin:8px 0;font-size:12px}
 .ans{color:#22c55e;font-weight:bold;margin-top:4px;white-space:pre-line}
-.bubble{padding:10px 14px;border-radius:16px;font-size:12px;margin:6px 0;max-width:92%;line-height:1.6}
+.bubble{padding:10px 14px;border-radius:16px;font-size:12px;margin:6px 0;max-width:92%;line-height:1.7}
 .me{background:#ffd700;color:#000;margin-right:auto}
-.ai{background:#1a274f;color:#fff}
+.ai{background:#1a274f;color:#fff;white-space:pre-line}
+.btnQ{padding:6px 12px;border-radius:12px;background:#1a274f;border:1px solid #2a3a6a;color:#8ea0c0;font-size:10px;margin:2px}
 </style>
 </head>
 <body>
 <div class="header">
 <div class="logo">꧁༺ مهدي ༻꧂</div>
-<div style="font-size:11px;color:#8ea0c0">منصة تالتة إعدادي - مذكرات + بنك أسئلة + مهدي AI</div>
+<div style="font-size:11px;color:#8ea0c0">مذكرات مهدي + بنك أسئلة + Mahdy AI</div>
 </div>
 
 <div style="max-width:540px;margin:auto;padding:10px">
 
 <div class="card">
-<div class="title">📚 مذكرة عربي - اسم الفاعل</div>
-<div class="note">التعريف: اسم بيدل على اللي عمل الفعل
-الوزن: 
-- ثلاثي: فاعل (كتب=كاتب، قال=قائل، قضى=قاضٍ)
-- غير ثلاثي: ميم مضمومة + كسر قبل الآخر (أكرم=مُكرِم، انطلق=مُنطلِق، استخرج=مُستخرِج)
-ملاحظات مهدي: 
-- لو الفعل أجوف (قال) بنقلب الألف همزة = قائل
-- لو ناقص (قضى) بنحذف الياء في الرفع والجر = هذا قاضٍ</div>
-<div class="q"><b>س: هات اسم الفاعل من (فهم - علّم - استفهم)</b><div class="ans">ج: فاهم - مُعلِّم - مُستفهِم</div></div>
+<div class="title">📚 عربي - اسم الفاعل (مذكرة مهدي كاملة)</div>
+<div class="note">يعني ايه؟ اسم بيدل على اللي عمل الفعل
+الصياغة:
+1- ثلاثي = وزن فاعل
+كتب=كاتب، لعب=لاعب، فهم=فاهم
+قال=قائل (أجوف نقلب ألف همزة)
+قضى=قاضٍ (ناقص نحذف الياء في الرفع والجر)
+
+2- غير ثلاثي = ميم مضمومة + كسر قبل الآخر
+أكرم=مُكرِم، علّم=مُعلِّم، انطلق=مُنطلِق، استخرج=مُستخرِج
+
+عمله: بيرفع فاعل وينصب مفعول
+مثال: الكاتب درسُه واضح = درسه مفعول به لاسم الفاعل</div>
+<div class="q"><b>تدريب 1:</b> هات اسم الفاعل من (صام - دعا - استفهم)<div class="ans">ج: صائم - داعٍ - مُستفهِم</div></div>
+<div class="q"><b>تدريب 2:</b> استخرج اسم الفاعل: "المؤمن صادق في قوله"<div class="ans">ج: المؤمن (من آمن) - صادق (من صدق)</div></div>
 </div>
 
 <div class="card">
-<div class="title">💻 مذكرة حاسب - الذكاء الاصطناعي</div>
-<div class="note">1- y = w*x + b : قانون التنبؤ
-   x = المدخل، w = الوزن بيتعلم، b = التحيز
-   مثال: x=10 درجات، w=0.5، b=2 => y=7 توقع
+<div class="title">💻 حاسب آلي - ذكاء اصطناعي وبايثون</div>
+<div class="note">قانون y = w*x + b
+y = التوقع، x = المدخل، w = وزن بيتعلم، b = تحيز
+مثال: عايز تتوقع سعر شقة مساحتها x=100
+لو w=0.5 و b=10 => y=60 ألف
 
-2- Python:
-   list = [1,2,3] بتحفظ بيانات
-   for x in list: بتلف عليهم
-   def predict(x): بتعمل دالة
-   AI بيجرب w و b كتير لحد ما الخطأ يبقى صغير</div>
-<div class="q"><b>س: ليه بنستخدم Lists في AI؟</b><div class="ans">ج: عشان نحفظ آلاف البيانات (درجات، أسعار) وندرب الموديل عليها مرة واحدة</div></div>
+بايثون:
+- list = [1,2,3] بتحفظ بيانات كتير
+- for x in list: بتلف على كل قيمة
+- def predict(x): return 2*x+1 بتعمل دالة
+- AI بيجرب w و b كتير لحد ما الخطأ يصغر
+
+مثال كود:
+data = [1,2,3]
+for x in data:
+    print(2*x+1) # 3,5,7</div>
+<div class="q"><b>س: ليه AI محتاج Lists؟</b><div class="ans">ج: عشان يحفظ آلاف الأمثلة ويتعلم منها مرة واحدة</div></div>
 </div>
 
 <div class="card">
-<div class="title">🌍 مذكرة دراسات - تالتة اعدادي</div>
-<div class="note">أولا: قارات العالم
-- القديم: أفريقيا، آسيا، أوروبا
-- الجديد: الأمريكتين، أستراليا، القطبية
+<div class="title">🌍 دراسات - قارات العالم ومحمد علي</div>
+<div class="note">قارات العالم:
+- قديم: آسيا، أفريقيا، أوروبا (عرفوها من زمان)
+- جديد: الأمريكتين، أستراليا، القطبية الجنوبية (اكتشفت حديثا)
+- محيطات: الهادي أكبر محيط، الأطلسي، الهندي
 
-ثانيا: محمد علي 1805-1848 مؤسس مصر الحديثة
-- بنا جيش قوي، مدارس، مصانع، قناطر
+محمد علي باشا 1805-1848 مؤسس مصر الحديثة:
+- بنا جيش وأسطول قوي
+- بنا مدارس ومصانع وقناطر خيرية
+- حروبه: ضد الوهابيين في الحجاز، في اليونان، في الشام ضد الدولة العثمانية
+- خلّى مصر دولة قوية
+
+ثورة 1919 بقيادة سعد زغلول ضد الاحتلال الإنجليزي
+شعارها: مصر للمصريين</div>
+<div class="q"><b>س: بما تفسر: قوة محمد علي؟</b><div class="ans">ج: لأنه اهتم بالجيش والتعليم والصناعة والزراعة والقناطر</div></div>
+</div>
+
+<div class="card" style="border:2px solid #ffd700">
+<div class="title">🤖 مهدي AI - حافظ التلات مواد كلهم</div>
+<div id="chatBox" style="height:280px;overflow:auto;display:flex;flex-direction:column">
+<div class="bubble ai">أهلا! إزيك حضرتك؟ 👋 مرحب أهلا بيك في منصة مهدي! 🌟
+
+أنا مهدي AI، حافظ التلات مواد:
+
+📚 عربي: اسم الفاعل، اسم المفعول، أغلى من الذهب
+💻 حاسب: y=w*x+b، بايثون، lists
+🌍 دراسات: قارات العالم، محمد علي، ثورة 1919
+
+اكتب أي سؤال وهجاوبك فوراً!</div>
+</div>
+<div style="display:flex;gap:6px;margin-top:10px">
+<input id="chatIn" placeholder="اكتب: اشرح اسم الفاعل / اشرح بايثون / مين محمد علي..." style="flex:1;padding:11px;border-radius:22px;border:1px solid #334;background:#000;color:#fff;font-size:12px">
+<button onclick="ask()" style="padding:11px 18px;border-radius:22px;background:#ffd700;border:none;font-weight:900">إرسال</button>
+</div>
+<div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">
+<button class="btnQ" onclick="quick('اشرح اسم الفاعل')">اسم الفاعل</button>
+<button class="btnQ" onclick="quick('اشرح y=w*x+b')">ذكاء اصطناعي</button>
+<button class="btnQ" onclick="quick('مين محمد علي')">محمد علي</button>
+<button class="btnQ" onclick="quick('اشرح قارات العالم')">قارات العالم</button>
+</div>
+</div>
+
+</div>
+
+<script>
+const db={
+عربي:`أهلا إزيك حضرتك؟ 📚 اسم الفاعل:
+
+1- من الثلاثي على وزن فاعل:
+كتب=كاتب، لعب=لاعب، فهم=فاهم
+قال=قائل (أجوف)، باع=بائع
+قضى=قاضٍ، دعا=داعٍ (ناقص نحذف الياء)
+
+2- من غير الثلاثي:
+هات المضارع + ميم مضمومة + كسر قبل الآخر
+أكرم=يكرم=مُكرِم
+علّم=يعلّم=مُعلِّم
+انطلق=ينطلق=مُنطلِق
+استخرج=يستخرج=مُستخرِج
+
+عمله: يرفع فاعل وينصب مفعول
+مثال: "الكاتب درسَه واضح" درسه مفعول به لاسم الفاعل
+تحب أديك تدريب؟`,
+
+حاسب:`مرحب أهلا بحضرتك! 💻 حاسب:
+
+y=w*x+b ده قانون التنبؤ في AI
+
+x = المدخل (درجة، مساحة)
+y = التوقع (النتيجة)
+w = الوزن (الذكاء بيتعلمه من البيانات)
+b = تحيز بيظبط النتيجة
+
+مثال: x=10، w=2، b=1 => y=21
+
+بايثون:
+data = [1,2,3]
+for x in data:
+    y = 2*x + 1
+    print(y) # 3,5,7
+
+ليه Lists؟ عشان نحفظ آلاف البيانات مرة واحدة وندرب عليها
+عايز كود يتعلم لوحده؟`,
+
+دراسات:`أهلا بحضرتك! 🌍 دراسات:
+
+1- قارات العالم:
+قديم: آسيا، أفريقيا، أوروبا
+جديد: أمريكا الشمالية والجنوبية، أستراليا، القطبية
+محيطات: الهادي أكبر واحد، الأطلسي، الهندي، المتجمد
+
+2- محمد علي باشا 1805 مؤسس مصر الحديثة:
+- بنا جيش وأسطول
+- بنا مدارس ومصانع
+- بنا القناطر الخيرية
+- حروبه: الوهابيين في السعودية، اليونان، الشام
+- خلى مصر قوة كبيرة
+
+3- ثورة 1919 سعد زغلول ضد الانجليز
+عايز أسئلة؟`,
+
+عام:`مرحب أهلا إزيك حضرتك انت؟ 👋 منور منصة مهدي!
+
+قولّي مثلا:
+- "اشرح اسم الفاعل"
+- "اشرح البايثون" 
+- "مين محمد علي"
+- "لخص قارات العالم"
+
+وأنا هشرحلك بالمذكرة بتاعة مهدي كاملة!`
+};
+function ask(){
+ let input=document.getElementById('chatIn'), text=input.value.trim(); if(!text) return;
+ let box=document.getElementById('chatBox');
+ box.innerHTML+=`<div class="bubble me">${text}</div>`; input.value='';
+ let l=text.toLowerCase(), r=db.عام;
+ if(l.includes("فاعل")||l.includes("عربي")||l.includes("نحو")) r=db.عربي;
+ else if(l.includes("حاسب")||l.includes("بايثون")||l.includes("y")||l.includes("ذكاء")||l.includes("list")) r=db.حاسب;
+ else if(l.includes("دراسات")||l.includes("قارات")||l.includes("محمد علي")||l.includes("تاريخ")||l.includes("ثورة")) r=db.دراسات;
+ setTimeout(()=>{box.innerHTML+=`<div class="bubble ai">${r}</div>`; box.scrollTop=99999},300);
+}
+function quick(t){document.getElementById('chatIn').value=t;ask();}
+document.getElementById('chatIn').addEventListener('keydown',e=>{if(e.key==='Enter')ask()});
+</script>
+</body>
+</html>
