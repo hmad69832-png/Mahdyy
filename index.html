@@ -1,195 +1,351 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>منصة مهدي - تالتة اعدادي</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Tahoma}
-body{background:#040b1e;color:#fff;line-height:1.8}
-.header{background:#000;padding:18px;text-align:center;border-bottom:2px solid #ffd700;position:sticky;top:0;z-index:99}
-.logo{font-size:32px;font-weight:900;color:#ffd700}
-.card{background:linear-gradient(145deg,#101b3b,#0d142e);border:1px solid #1e2d5a;border-radius:20px;padding:16px;margin:14px auto;max-width:520px}
-.title{font-size:14px;font-weight:900;color:#ffd700;margin-bottom:8px}
-.note{background:#060d24;border-right:3px solid #ffd700;padding:12px;border-radius:10px;font-size:12px;color:#cdd6f0;margin:8px 0;white-space:pre-line}
-.q{background:#1a274f;padding:10px;border-radius:12px;margin:8px 0;font-size:12px}
-.ans{color:#22c55e;font-weight:bold;margin-top:4px;white-space:pre-line}
-.bubble{padding:10px 14px;border-radius:16px;font-size:12px;margin:6px 0;max-width:92%;line-height:1.7}
-.me{background:#ffd700;color:#000;margin-right:auto}
-.ai{background:#1a274f;color:#fff;white-space:pre-line}
-.btnQ{padding:6px 12px;border-radius:12px;background:#1a274f;border:1px solid #2a3a6a;color:#8ea0c0;font-size:10px;margin:2px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة الصف الثالث الإعدادي - المنهج الجديد</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --bg: #f4f7f6;
+            --card-bg: #ffffff;
+            --text: #333333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 { margin: 0; font-size: 2rem; }
+        header p { margin-top: 0.5rem; opacity: 0.9; }
+
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            border: none;
+            background: #e0e0e0;
+            color: var(--text);
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .subject-content {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .subject-content.active {
+            display: grid;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--accent);
+        }
+
+        .card h3 { color: var(--primary); margin-top: 0; }
+        .card ul { padding-right: 20px; }
+        .card li { margin-bottom: 8px; }
+
+        /* شات مهدي Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 350px;
+            height: 480px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #ccc;
+        }
+
+        .chat-header {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-header span {
+            width: 10px;
+            height: 10px;
+            background: #2ecc71;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .chat-box {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #f9f9f9;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .bot-msg {
+            background: #e1f5fe;
+            color: #0277bd;
+            align-self: flex-start;
+        }
+
+        .user-msg {
+            background: var(--accent);
+            color: white;
+            align-self: flex-end;
+        }
+
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #eee;
+        }
+
+        .chat-input input {
+            flex: 1;
+            border: none;
+            padding: 12px;
+            outline: none;
+        }
+
+        .chat-input button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .chat-widget {
+                width: 90%;
+                left: 5%;
+                bottom: 10px;
+                height: 400px;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="header">
-<div class="logo">꧁༺ مهدي ༻꧂</div>
-<div style="font-size:11px;color:#8ea0c0">مذكرات مهدي + بنك أسئلة + Mahdy AI</div>
-</div>
 
-<div style="max-width:540px;margin:auto;padding:10px">
+    <header>
+        <h1>منصة 3 إعدادي - المنهج الجديد</h1>
+        <p>مذكرات، أسئلة، وإجابات في اللغة العربية، الحاسب الآلي، والدراسات الاجتماعية</p>
+    </header>
 
-<div class="card">
-<div class="title">📚 عربي - اسم الفاعل (مذكرة مهدي كاملة)</div>
-<div class="note">يعني ايه؟ اسم بيدل على اللي عمل الفعل
-الصياغة:
-1- ثلاثي = وزن فاعل
-كتب=كاتب، لعب=لاعب، فهم=فاهم
-قال=قائل (أجوف نقلب ألف همزة)
-قضى=قاضٍ (ناقص نحذف الياء في الرفع والجر)
+    <div class="container">
+        <!-- التبويبات -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showSubject('arabic', event)">اللغة العربية</button>
+            <button class="tab-btn" onclick="showSubject('computer', event)">الحاسب الآلي</button>
+            <button class="tab-btn" onclick="showSubject('studies', event)">الدراسات الاجتماعية</button>
+        </div>
 
-2- غير ثلاثي = ميم مضمومة + كسر قبل الآخر
-أكرم=مُكرِم، علّم=مُعلِّم، انطلق=مُنطلِق، استخرج=مُستخرِج
+        <!-- مادة اللغة العربية -->
+        <div id="arabic" class="subject-content active">
+            <div class="card">
+                <h3>📚 المذكرات والشرح</h3>
+                <ul>
+                    <li>ملخص قواعد النحو (المناداة، البدل، مدح وذم، ممنوع من الصرف).</li>
+                    <li>شرح نصوص ومواطن الجمال في المقررات.</li>
+                    <li>تحليل القصة المقررة والدروس المستفادة.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>❓ بنك الأسئلة</h3>
+                <ul>
+                    <li>أسئلة إعراب واستخراج من الامتحانات السابقة.</li>
+                    <li>أسئلة اختيار من متعدد على القراءة والنصوص.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>✅ الإجابات النموذجية</h3>
+                <ul>
+                    <li>حلول تدريبات الكتاب المدرسي بالكامل.</li>
+                    <li>إجابات نماذج الامتحانات الاسترشادية.</li>
+                </ul>
+            </div>
+        </div>
 
-عمله: بيرفع فاعل وينصب مفعول
-مثال: الكاتب درسُه واضح = درسه مفعول به لاسم الفاعل</div>
-<div class="q"><b>تدريب 1:</b> هات اسم الفاعل من (صام - دعا - استفهم)<div class="ans">ج: صائم - داعٍ - مُستفهِم</div></div>
-<div class="q"><b>تدريب 2:</b> استخرج اسم الفاعل: "المؤمن صادق في قوله"<div class="ans">ج: المؤمن (من آمن) - صادق (من صدق)</div></div>
-</div>
+        <!-- مادة الحاسب الآلي -->
+        <div id="computer" class="subject-content">
+            <div class="card">
+                <h3>📚 المذكرات والشرح</h3>
+                <ul>
+                    <li>حل المشكلات (Problem Solving) وخرائط التدفق (Flowcharts).</li>
+                    <li>أساسيات لغة Visual Basic.NET والأنواع البيانية.</li>
+                    <li>أدوات التحكم (Controls) وخصائصها.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>❓ بنك الأسئلة</h3>
+                <ul>
+                    <li>تتبع ورموز خرائط التدفق الهامة.</li>
+                    <li>أسئلة "أكمل" و"ضع علامة صح أو خطأ" على الأكواد.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>✅ الإجابات النموذجية</h3>
+                <ul>
+                    <li>حل أسئلة نهاية كل فصل دراسي.</li>
+                    <li>حل نماذج خرائط التدفق المعقدة.</li>
+                </ul>
+            </div>
+        </div>
 
-<div class="card">
-<div class="title">💻 حاسب آلي - ذكاء اصطناعي وبايثون</div>
-<div class="note">قانون y = w*x + b
-y = التوقع، x = المدخل، w = وزن بيتعلم، b = تحيز
-مثال: عايز تتوقع سعر شقة مساحتها x=100
-لو w=0.5 و b=10 => y=60 ألف
+        <!-- مادة الدراسات الاجتماعية -->
+        <div id="studies" class="subject-content">
+            <div class="card">
+                <h3>📚 المذكرات والشرح</h3>
+                <ul>
+                    <li>جغرافيا: قارات العالم، المناخ، والسكان.</li>
+                    <li>تاريخ: مصر في العصر العثماني وثورات الشعب المصري.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>❓ بنك الأسئلة</h3>
+                <ul>
+                    <li>أسئلة "بم تفسر" و"ما النتائج المترتبة على".</li>
+                    <li>تدريبات الخرائط والتضاريس العالمية.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>✅ الإجابات النموذجية</h3>
+                <ul>
+                    <li>إجابات خرائط القارات المفصلة.</li>
+                    <li>إجابات الأسئلة التاريخية الشاملة.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-بايثون:
-- list = [1,2,3] بتحفظ بيانات كتير
-- for x in list: بتلف على كل قيمة
-- def predict(x): return 2*x+1 بتعمل دالة
-- AI بيجرب w و b كتير لحد ما الخطأ يصغر
+    <!-- شات مهدي الذكي -->
+    <div class="chat-widget">
+        <div class="chat-header">
+            <span></span> شات "مهدي" - المعلم الذكي
+        </div>
+        <div class="chat-box" id="chatBox">
+            <div class="message bot-msg">
+                أهلاً بك يا بطل! أنا "مهدي"، مساعدك الذكي لمواد 3 إعدادي (عربي، حاسب، دراسات). اسألني عن أي درس أو قاعدة!
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="اكتب سؤالك هنا..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">إرسال</button>
+        </div>
+    </div>
 
-مثال كود:
-data = [1,2,3]
-for x in data:
-    print(2*x+1) # 3,5,7</div>
-<div class="q"><b>س: ليه AI محتاج Lists؟</b><div class="ans">ج: عشان يحفظ آلاف الأمثلة ويتعلم منها مرة واحدة</div></div>
-</div>
+    <script>
+        // التنقل بين المواد
+        function showSubject(subjectId, e) {
+            document.querySelectorAll('.subject-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(subjectId).classList.add('active');
+            e.target.classList.add('active');
+        }
 
-<div class="card">
-<div class="title">🌍 دراسات - قارات العالم ومحمد علي</div>
-<div class="note">قارات العالم:
-- قديم: آسيا، أفريقيا، أوروبا (عرفوها من زمان)
-- جديد: الأمريكتين، أستراليا، القطبية الجنوبية (اكتشفت حديثا)
-- محيطات: الهادي أكبر محيط، الأطلسي، الهندي
+        // قاعدة معرفة المعلم الذكي "مهدي"
+        const mahdiKnowledge = [
+            { keywords: ["منادى", "نحو", "اعراب المنادى"], response: "المنادى ينقسم إلى: مبني (المفرد العلم، النكرة المقصودة) ويُبنى على ما يُرفع به، ومُعرب (المضاف، الشبيه بالمضاف، النكرة غير المقصودة) ويكون منصوباً." },
+            { keywords: ["بدل", "البدل"], response: "البدل 3 أنواع: مطابق (كل من كل)، بعض من كل، واشتمال. مثال: جاء المعلمُ أحمدُ (أحمد: بدل مطابق)." },
+            { keywords: ["خريطة تدفق", "flowchart", "حاسب", "خرائط"], response: "خريطة التدفق هي تمثيل بياني بخطوات متسلسلة لحل مشكلة ما. نستخدم البيضاوي للبداية والنهاية، والمتوازي للمدخلات والمخرجات، والمستطيل للعمليات، والمعين للقرارات." },
+            { keywords: ["فيسوال", "visual basic", "vb"], response: "لغة Visual Basic.NET هي لغة برمجة عالية المستوى كائنية التوجه (OOP) وموجهة بالحدث، تُستخدم لإنشاء تطبيقات الويندوز." },
+            { keywords: ["قارات", "دراسات", "جغرافيا", "تضاريس"], response: "أكبر قارات العالم من حيث المساحة هي قارة آسيا، يليها إفريقيا ثم أمريكا الشمالية. وأصغر القارات هي أستراليا." },
+            { keywords: ["عثماني", "تاريخ", "ثورة"], response: "خضعت مصر للحكم العثماني منذ معركة مرج دابق 1516 ومعركة الريدانية 1517 حيث أصبحت مصر ولاية عثمانية." }
+        ];
 
-محمد علي باشا 1805-1848 مؤسس مصر الحديثة:
-- بنا جيش وأسطول قوي
-- بنا مدارس ومصانع وقناطر خيرية
-- حروبه: ضد الوهابيين في الحجاز، في اليونان، في الشام ضد الدولة العثمانية
-- خلّى مصر دولة قوية
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            if (!message) return;
 
-ثورة 1919 بقيادة سعد زغلول ضد الاحتلال الإنجليزي
-شعارها: مصر للمصريين</div>
-<div class="q"><b>س: بما تفسر: قوة محمد علي؟</b><div class="ans">ج: لأنه اهتم بالجيش والتعليم والصناعة والزراعة والقناطر</div></div>
-</div>
+            // عرض رسالة المستخدم
+            appendMessage(message, 'user-msg');
+            input.value = '';
 
-<div class="card" style="border:2px solid #ffd700">
-<div class="title">🤖 مهدي AI - حافظ التلات مواد كلهم</div>
-<div id="chatBox" style="height:280px;overflow:auto;display:flex;flex-direction:column">
-<div class="bubble ai">أهلا! إزيك حضرتك؟ 👋 مرحب أهلا بيك في منصة مهدي! 🌟
+            // معالجة رد مهدي
+            setTimeout(() => {
+                const response = getMahdiResponse(message);
+                appendMessage(response, 'bot-msg');
+            }, 600);
+        }
 
-أنا مهدي AI، حافظ التلات مواد:
+        function getMahdiResponse(query) {
+            const lowerQuery = query.toLowerCase();
+            for (let item of mahdiKnowledge) {
+                if (item.keywords.some(keyword => lowerQuery.includes(keyword))) {
+                    return item.response;
+                }
+            }
+            return "سؤال ممتاز! لكن يحتاج تفصيلاً أكثر. حاول السؤال بكلمات مثل: (منادى، بدل، خريطة تدفق، فيسوال، قارات، عثمانيين).";
+        }
 
-📚 عربي: اسم الفاعل، اسم المفعول، أغلى من الذهب
-💻 حاسب: y=w*x+b، بايثون، lists
-🌍 دراسات: قارات العالم، محمد علي، ثورة 1919
+        function appendMessage(text, className) {
+            const chatBox = document.getElementById('chatBox');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${className}`;
+            msgDiv.innerText = text;
+            chatBox.appendChild(msgDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
 
-اكتب أي سؤال وهجاوبك فوراً!</div>
-</div>
-<div style="display:flex;gap:6px;margin-top:10px">
-<input id="chatIn" placeholder="اكتب: اشرح اسم الفاعل / اشرح بايثون / مين محمد علي..." style="flex:1;padding:11px;border-radius:22px;border:1px solid #334;background:#000;color:#fff;font-size:12px">
-<button onclick="ask()" style="padding:11px 18px;border-radius:22px;background:#ffd700;border:none;font-weight:900">إرسال</button>
-</div>
-<div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">
-<button class="btnQ" onclick="quick('اشرح اسم الفاعل')">اسم الفاعل</button>
-<button class="btnQ" onclick="quick('اشرح y=w*x+b')">ذكاء اصطناعي</button>
-<button class="btnQ" onclick="quick('مين محمد علي')">محمد علي</button>
-<button class="btnQ" onclick="quick('اشرح قارات العالم')">قارات العالم</button>
-</div>
-</div>
-
-</div>
-
-<script>
-const db={
-عربي:`أهلا إزيك حضرتك؟ 📚 اسم الفاعل:
-
-1- من الثلاثي على وزن فاعل:
-كتب=كاتب، لعب=لاعب، فهم=فاهم
-قال=قائل (أجوف)، باع=بائع
-قضى=قاضٍ، دعا=داعٍ (ناقص نحذف الياء)
-
-2- من غير الثلاثي:
-هات المضارع + ميم مضمومة + كسر قبل الآخر
-أكرم=يكرم=مُكرِم
-علّم=يعلّم=مُعلِّم
-انطلق=ينطلق=مُنطلِق
-استخرج=يستخرج=مُستخرِج
-
-عمله: يرفع فاعل وينصب مفعول
-مثال: "الكاتب درسَه واضح" درسه مفعول به لاسم الفاعل
-تحب أديك تدريب؟`,
-
-حاسب:`مرحب أهلا بحضرتك! 💻 حاسب:
-
-y=w*x+b ده قانون التنبؤ في AI
-
-x = المدخل (درجة، مساحة)
-y = التوقع (النتيجة)
-w = الوزن (الذكاء بيتعلمه من البيانات)
-b = تحيز بيظبط النتيجة
-
-مثال: x=10، w=2، b=1 => y=21
-
-بايثون:
-data = [1,2,3]
-for x in data:
-    y = 2*x + 1
-    print(y) # 3,5,7
-
-ليه Lists؟ عشان نحفظ آلاف البيانات مرة واحدة وندرب عليها
-عايز كود يتعلم لوحده؟`,
-
-دراسات:`أهلا بحضرتك! 🌍 دراسات:
-
-1- قارات العالم:
-قديم: آسيا، أفريقيا، أوروبا
-جديد: أمريكا الشمالية والجنوبية، أستراليا، القطبية
-محيطات: الهادي أكبر واحد، الأطلسي، الهندي، المتجمد
-
-2- محمد علي باشا 1805 مؤسس مصر الحديثة:
-- بنا جيش وأسطول
-- بنا مدارس ومصانع
-- بنا القناطر الخيرية
-- حروبه: الوهابيين في السعودية، اليونان، الشام
-- خلى مصر قوة كبيرة
-
-3- ثورة 1919 سعد زغلول ضد الانجليز
-عايز أسئلة؟`,
-
-عام:`مرحب أهلا إزيك حضرتك انت؟ 👋 منور منصة مهدي!
-
-قولّي مثلا:
-- "اشرح اسم الفاعل"
-- "اشرح البايثون" 
-- "مين محمد علي"
-- "لخص قارات العالم"
-
-وأنا هشرحلك بالمذكرة بتاعة مهدي كاملة!`
-};
-function ask(){
- let input=document.getElementById('chatIn'), text=input.value.trim(); if(!text) return;
- let box=document.getElementById('chatBox');
- box.innerHTML+=`<div class="bubble me">${text}</div>`; input.value='';
- let l=text.toLowerCase(), r=db.عام;
- if(l.includes("فاعل")||l.includes("عربي")||l.includes("نحو")) r=db.عربي;
- else if(l.includes("حاسب")||l.includes("بايثون")||l.includes("y")||l.includes("ذكاء")||l.includes("list")) r=db.حاسب;
- else if(l.includes("دراسات")||l.includes("قارات")||l.includes("محمد علي")||l.includes("تاريخ")||l.includes("ثورة")) r=db.دراسات;
- setTimeout(()=>{box.innerHTML+=`<div class="bubble ai">${r}</div>`; box.scrollTop=99999},300);
-}
-function quick(t){document.getElementById('chatIn').value=t;ask();}
-document.getElementById('chatIn').addEventListener('keydown',e=>{if(e.key==='Enter')ask()});
-</script>
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+    </script>
 </body>
 </html>
+
