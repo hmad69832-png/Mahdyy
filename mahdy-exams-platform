@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mahdy Exams | منصة الامتحانات</title>
+<style>
+:root {
+  --main:#2563eb;
+  --bg:#f1f5f9;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:var(--bg);
+  color:#172033;
+}
+header {
+  background:var(--main);
+  color:white;
+  padding:22px 16px;
+  text-align:center;
+}
+header h1 { margin:0 0 8px; }
+nav {
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  flex-wrap:wrap;
+  padding:12px;
+  background:white;
+}
+button {
+  border:0;
+  border-radius:9px;
+  padding:12px 16px;
+  background:var(--main);
+  color:white;
+  font-size:15px;
+  cursor:pointer;
+}
+nav button { background:#e8efff; color:#1744a0; }
+main {
+  max-width:850px;
+  margin:20px auto;
+  padding:0 12px;
+}
+.card {
+  background:white;
+  padding:18px;
+  border-radius:14px;
+  margin-bottom:15px;
+  box-shadow:0 3px 12px #0000000a;
+}
+input, textarea, select {
+  width:100%;
+  padding:12px;
+  margin:7px 0 12px;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  font:inherit;
+}
+.question {
+  border:1px solid #e2e8f0;
+  padding:12px;
+  border-radius:10px;
+  margin:12px 0;
+}
+.option { display:block; padding:7px 0; }
+.hidden { display:none; }
+.small { color:#64748b; font-size:13px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Mahdy Exams</h1>
+  <div>منصتك لإنشاء وحل الامتحانات</div>
+</header>
+
+<nav>
+  <button onclick="page('home')">الرئيسية</button>
+  <button onclick="page('create')">إنشاء امتحان</button>
+  <button onclick="page('exams')">الامتحانات</button>
+  <button onclick="page('settings')">الإعدادات</button>
+</nav>
+
+<main>
+<section id="home" class="card">
+  <h2>أهلاً بيك في Mahdy Exams 👋</h2>
+  <p>أنشئ امتحانك، أضف الأسئلة، وابدأ الاختبار.</p>
+  <button onclick="page('create')">إنشاء امتحان جديد</button>
+</section>
+
+<section id="create" class="card hidden">
+  <h2>إنشاء امتحان</h2>
+  <label>اسم الامتحان</label>
+  <input id="examTitle" placeholder="مثال: امتحان نحو">
+
+  <label>اسم المدرس أو منشئ الامتحان</label>
+  <input id="teacher" placeholder="اسمك">
+
+  <div id="questionForm"></div>
+
+  <button onclick="addQuestion()">+ إضافة سؤال</button>
+  <button onclick="saveExam()">حفظ الامتحان</button>
+</section>
+
+<section id="exams" class="card hidden">
+  <h2>الامتحانات المتاحة على هذا الجهاز</h2>
+  <div id="examList"></div>
+</section>
+
+<section id="solve" class="card hidden">
+  <h2 id="solveTitle"></h2>
+  <label>اسم الطالب</label>
+  <input id="studentName" placeholder="اكتب اسمك">
+  <div id="solveQuestions"></div>
+  <button onclick="submitExam()">تسليم الامتحان</button>
+  <div id="result"></div>
+</section>
+
+<section id="settings" class="card hidden">
+  <h2>إعدادات شكل الموقع</h2>
+  <label>لون الموقع</label>
+  <input type="color" id="mainColor" value="#2563eb">
+  <label>لون الخلفية</label>
+  <input type="color" id="bgColor" value="#f1f5f9">
+  <label>نوع الخط</label>
+  <select id="font">
+    <option value="Tahoma">Tahoma</option>
+    <option value="Arial">Arial</option>
+    <option value="Cairo">Cairo</option>
+  </select>
+  <button onclick="applySettings()">حفظ الإعدادات</button>
+</section>
+
+<section id="results" class="card hidden">
+  <h2>نتائج هذا الجهاز</h2>
+  <div id="resultsList"></div>
+</section>
+</main>
+
+<script>
+let exams = JSON.parse(localStorage.getItem('mahdyExams') || '[]');
+let results = JSON.parse(localStorage.getItem('mahdyResults') || '[]');
+let currentExam = null;
+let count = 0;
+
+function page(id) {
+  document.querySelectorAll('main section').forEach(s =>
+    s.classList.add('hidden')
+  );
+  document.getElementById(id).classList.remove('hidden');
+  if(id === 'exams') renderExams();
+  if(id === 'results') renderResults();
+}
+
+function addQuestion() {
+  count++;
+  const div = document.createElement('div');
+  div.className = 'question';
+  div.innerHTML = `
+    <h3>السؤال ${count}</h3>
+    <input class="qtext" placeholder="اكتب نص السؤال">
+    <input class="opt" placeholder="الاختيار الأول">
+    <input class="opt" placeholder="الاختيار الثاني">
+    <input class="opt" placeholder="الاختيار الثالث">
+    <input class="opt" placeholder="الاختيار الرابع">
+    <label>رقم الإجابة الصحيحة</label>
+    <select class="correct">
+      <option value="0">الأول</option>
+      <option value="1">الثاني</option>
+      <option value="2">الثالث</option>
+      <option value="3">الرابع</option>
+    </select>
+    <button onclick="this.parentElement.remove()">حذف السؤال</button>
+  `;
+  document.getElementById('questionForm').appendChild(div);
+}
+
+function saveExam() {
+  const title = document.getElementById('examTitle').value.trim();
+  const blocks = [...document.querySelectorAll('#questionForm .question')];
+
+  if(!title || !blocks.length) {
+    alert('اكتب اسم الامتحان وأضف سؤالاً واحداً على الأقل');
+    return;
+  }
+
+  const questions = blocks.map(b => ({
+    text:b.querySelector('.qtext').value.trim(),
+    options:[...b.querySelectorAll('.opt')].map(x=>x.value.trim()),
+    correct:+b.querySelector('.correct').value
+  }));
+
+  if(questions.some(q=>!q.text || q.options.some(o=>!o))) {
+    alert('أكمل نص كل سؤال وجميع الاختيارات');
+    return;
+  }
+
+  exams.push({
+    id:Date.now(),
+    title,
+    teacher:document.getElementById('teacher').value.trim(),
+    questions
+  });
+
+  localStorage.setItem('mahdyExams',JSON.stringify(exams));
+  document.getElementById('questionForm').innerHTML='';
+  document.getElementById('examTitle').value='';
+  count=0;
+  alert('تم حفظ الامتحان على هذا الجهاز');
+  page('exams');
+}
+
+function renderExams() {
+  const list=document.getElementById('examList');
+  list.innerHTML='';
+
+  if(!exams.length) {
+    list.textContent='لا توجد امتحانات محفوظة على هذا الجهاز.';
+    return;
+  }
+
+  exams.forEach(exam=>{
+    const div=document.createElement('div');
+    div.className='question';
+    const title=document.createElement('h3');
+    title.textContent=exam.title;
+    const info=document.createElement('p');
+    info.textContent=exam.questions.length+' سؤال';
+    const solve=document.createElement('button');
+    solve.textContent='حل الامتحان';
+    solve.onclick=()=>startExam(exam.id);
+    const del=document.createElement('button');
+    del.textContent='حذف';
+    del.style.marginRight='8px';
+    del.onclick=()=>{
+      if(confirm('هل تريد حذف الامتحان؟')) {
+        exams=exams.filter(e=>e.id!==exam.id);
+        localStorage.setItem('mahdyExams',JSON.stringify(exams));
+        renderExams();
+      }
+    };
+    div.append(title,info,solve,del);
+    list.appendChild(div);
+  });
+}
+
+function startExam(id) {
+  currentExam=exams.find(e=>e.id===id);
+  if(!currentExam) return;
+
+  document.getElementById('solveTitle').textContent=currentExam.title;
+  document.getElementById('studentName').value='';
+  document.getElementById('result').textContent='';
+  const box=document.getElementById('solveQuestions');
+  box.innerHTML='';
+
+  currentExam.questions.forEach((q,i)=>{
+    const div=document.createElement('div');
+    div.className='question';
+    const h=document.createElement('h3');
+    h.textContent=(i+1)+'. '+q.text;
+    div.appendChild(h);
+
+    q.options.forEach((opt,j)=>{
+      const label=document.createElement('label');
+      label.className='option';
+      const radio=document.createElement('input');
+      radio.type='radio';
+      radio.name='q'+i;
+      radio.value=j;
+      radio.style.width='auto';
+      label.append(radio,document.createTextNode(' '+opt));
+      div.appendChild(label);
+    });
+    box.appendChild(div);
+  });
+  page('solve');
+}
+
+function submitExam() {
+  const name=document.getElementById('studentName').value.trim();
+  if(!name) {
+    alert('اكتب اسم الطالب');
+    return;
+  }
+
+  let score=0;
+  const answers=currentExam.questions.map((q,i)=>{
+    const selected=document.querySelector('input[name="q'+i+'"]:checked');
+    const value=selected ? +selected.value : -1;
+    if(value===q.correct) score++;
+    return value;
+  });
+
+  const record={
+    name,
+    exam:currentExam.title,
+    score,
+    total:currentExam.questions.length,
+    date:new Date().toLocaleString('ar-EG'),
+    answers
+  };
+
+  results.push(record);
+  localStorage.setItem('mahdyResults',JSON.stringify(results));
+  document.getElementById('result').textContent=
+    'درجتك: '+score+' من '+record.total;
+  alert('تم تسليم الامتحان');
+}
+
+function renderResults() {
+  const box=document.getElementById('resultsList');
+  box.innerHTML='';
+  if(!results.length) {
+    box.textContent='لا توجد نتائج محفوظة على هذا الجهاز.';
+    return;
+  }
+  results.forEach(r=>{
+    const div=document.createElement('div');
+    div.className='question';
+    div.textContent=`${r.name} — ${r.exam} — ${r.score}/${r.total} — ${r.date}`;
+    box.appendChild(div);
+  });
+}
+
+function applySettings() {
+  document.documentElement.style.setProperty(
+    '--main',document.getElementById('mainColor').value
+  );
+  document.documentElement.style.setProperty(
+    '--bg',document.getElementById('bgColor').value
+  );
+  document.body.style.fontFamily=document.getElementById('font').value;
+  alert('تم تعديل شكل الموقع');
+}
+
+addQuestion();
+</script>
+</body>
+</html>
+
